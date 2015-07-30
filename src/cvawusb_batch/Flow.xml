@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Flow>
+  <Item title="Disconnecting ports 3 and 4 and connecting port 3 to group 3" id="group3">
+    <Sequence>
+      <SetPort ip="192.168.11.122" port="3" value="0"></SetPort>
+      <Disconnect device="VID_2022&amp;PID_0139&amp;MI_00"></Disconnect>
+      <SetPort ip="192.168.11.122" port="4" value="0"></SetPort>
+      <SetPort ip="192.168.11.122" port="3" value="3"></SetPort>
+      <Connect device="VID_2022&amp;PID_0139&amp;MI_00"></Connect>
+    </Sequence>
+  </Item>
+  <Item title="Disconnecting ports 3 and 4 and connecting port 3 to group 4" id="group4">
+    <Sequence>
+      <SetPort ip="192.168.11.122" port="3" value="0"></SetPort>
+      <Disconnect device="VID_2022&amp;PID_0139&amp;MI_00"></Disconnect>
+      <SetPort ip="192.168.11.122" port="4" value="0"></SetPort>
+      <SetPort ip="192.168.11.122" port="4" value="3"></SetPort>
+    </Sequence>
+  </Item>
+</Flow>

@@ -1,0 +1,54 @@
+      Unattended Installation
+Windows XP, Vista, 2003 & 2008 Server
+
+
+Unattended Installations:
+=========================
+
+If you do not want to be presented with the "Found New Hardware Wizard" 
+prompting you to specify the location of the AnywhereUSB drivers during the 
+installation of an AnywhereUSB, then you can perform an Unattended Installation.
+The following steps are for setting up an Unattended Installation.
+
+1. Extract the driver package to a directory on your hard disk. For the 
+   purposes of these instructions we will assume that the drivers were extracted 
+   to the following directory "C:\AnywhereUSB Drivers", but you may alter this in
+   your own installations.
+
+2. Using REGEDIT.EXE or any other registry editor, append the directory 
+   that you have extracted this installation package to, to the DevicePath 
+   registry variable. The DevicePath registry variable is a REG_EXPAND_SZ 
+   variable that specifies the default directories that Windows will search
+   during hardware installations. The directory that you are appending 
+   needs to be the same directory where this installation package was 
+   extracted to. Use a semicolon ';' as a separator in between directories, 
+   no spaces are required in between semi-colons and the added directories. 
+   For example if you extracted the install package to "C:\AnywhereUSB Drivers"
+   then the DevicePath registry variable would look like this:
+
+   Name:          Type:            Data:
+   DevicePath     REG_EXPAND_SZ    %SystemRoot%\inf;"C:\AnywhereUSB Drivers"
+
+   The DevicePath variable is found in the following registry key: 
+   HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\
+
+3. Launch "C:\AnywhereUSB Drivers\Setup.exe -s" to install the Network Attached 
+   USB Enumerator driver.
+
+   NOTE: Make sure to add the "-s" silent install parameter to the Setup.exe 
+   program in order to avoid being prompted for user input. Installations on 
+   64bit versions of Windows should use Setup64.exe instead of Setup.exe.
+
+4. Connect to the AnywhereUSB Concentrator using the configuration utility, 
+   found in Start->Programs->AnywhereUSB->AnywhereUSB Configuration Utility 
+   and the rest of the drivers will install without prompting for user input.
+
+   An alternative method to connecting to the AnywhereUSB Concentrator is to 
+   manually add the IP Address of the Concentrator to be connected to the registry.
+   To do this add the IP Address to the following key:
+
+   Name:             Type:            Data:
+   IpAddressList     REG_MULTI_SZ     xxx.xxx.xxx.xxx <- IP Address of Concentrator
+
+   The IpAddressList variable is found in the following registry key: 
+   HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Awusbsys
