@@ -62,70 +62,17 @@ namespace cvawusb_batch
                 testGroup = args[0];
             }
 
-            var selectedItem = flow.Item.SingleOrDefault(s => s.id == testGroup);
-
-            if (selectedItem == null)
+            if (!flow.Exists(testGroup))
             {
                 Console.WriteLine("Flow item id not found in config file");
+                return;
             }
+
+            var selectedItem = flow.Find(testGroup);
 
             Console.WriteLine("Executing {0}", selectedItem.title);
 
-            foreach (var seq in selectedItem.Sequence.Items)
-            {
-                var connect = seq as FlowItemSequenceConnect;
-                var disconnect = seq as FlowItemSequenceDisconnect;
-                var port = seq as FlowItemSequenceSetPort;
-
-                if (connect != null)
-                {
-                    Console.WriteLine("Connecting to device {0}", connect.device);
-                    var usbDeviceLookup = new UsbDeviceLookup();
-                    usbDeviceLookup.Test();
-                    if (!usbDeviceLookup.WaitForConnection(connect.device))
-                    {
-                        break;
-                    }
-                }
-
-                if (disconnect != null)
-                {
-                    Console.WriteLine("Disconnecting device {0}", disconnect.device);
-                    var usbDeviceLookup = new UsbDeviceLookup();
-                    usbDeviceLookup.Test();
-                    if (!usbDeviceLookup.WaitForDisconnection(disconnect.device))
-                    {
-                        break;
-                    }
-                }
-
-                if (port != null)
-                {
-                    Console.WriteLine("Reconfiguring {0}", port.ip);
-                    var awUsbReconfig = new AnywhereUsbReconfig(port.ip);
-                    awUsbReconfig.LoadConfig();
-                    var portToSet = Convert.ToInt32(port.port);
-                    var valueToSet = Convert.ToInt32(port.value);
-
-                    Console.WriteLine("Current {0} value {1}", portToSet, awUsbReconfig.GetParam(portToSet));
-                    Console.WriteLine("Setting {0} value to {1}", portToSet, valueToSet);
-                    awUsbReconfig.SetParam(portToSet, valueToSet);
-                    awUsbReconfig.SaveConfig();
-                    Console.WriteLine("Checking");
-                    awUsbReconfig.LoadConfig();
-                    var newParam = awUsbReconfig.GetParam(portToSet);
-                    Console.WriteLine("Current {0} value {1}", portToSet, newParam);
-                    if (newParam == valueToSet)
-                    {
-                        Console.WriteLine("Change successfull");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Unsuccessfull. Aborting");
-                        break;
-                    }
-                }
-            }
+            flow.Execute(selectedItem.title);
         }
     }
 }

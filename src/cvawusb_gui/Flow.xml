@@ -5,13 +5,6 @@
       <SetPort ip="192.168.11.122" port="5" value="0"></SetPort>
       <Disconnect device="VID_2022&amp;PID_0139&amp;MI_00"></Disconnect>
       <SetPort ip="192.168.11.122" port="5" value="5"></SetPort>
-      <Connect device="VID_2022&amp;PID_0139&amp;MI_00"></Connect>
-      <Call id="disconnect"></Call>
-    </Sequence>
-  </Item>
-  <Item id="disconnect">
-    <Sequence>
-      <SetPort ip="192.168.11.122" port="5" value="0"></SetPort>
     </Sequence>
   </Item>
 </Flow>

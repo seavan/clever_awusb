@@ -91,6 +91,7 @@ namespace cvawusb_batch
         private object[] itemsField;
 
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Call", typeof(FlowItemSequenceCall))]
         [System.Xml.Serialization.XmlElementAttribute("Connect", typeof(FlowItemSequenceConnect))]
         [System.Xml.Serialization.XmlElementAttribute("Disconnect", typeof(FlowItemSequenceDisconnect))]
         [System.Xml.Serialization.XmlElementAttribute("SetPort", typeof(FlowItemSequenceSetPort))]
@@ -103,6 +104,28 @@ namespace cvawusb_batch
             set
             {
                 this.itemsField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    public partial class FlowItemSequenceCall
+    {
+
+        private string idField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string id
+        {
+            get
+            {
+                return this.idField;
+            }
+            set
+            {
+                this.idField = value;
             }
         }
     }
@@ -206,4 +229,5 @@ namespace cvawusb_batch
     }
 
 
+    
 }
