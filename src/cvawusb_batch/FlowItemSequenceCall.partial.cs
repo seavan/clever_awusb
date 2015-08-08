@@ -7,7 +7,7 @@ namespace cvawusb_batch
         public bool Execute(IExecutionControl executionControl)
         {
             Console.WriteLine("Calling {0}", id);
-            executionControl.Call(id);
+            return executionControl.Call(id);
         }
     }
 }

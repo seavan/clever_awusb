@@ -57,7 +57,7 @@ namespace cvawusb_gui
 
                 MyFlow = FlowConfigReader.Read("Flow.xml");
 
-                foreach (var flowItem in MyFlow.Item)
+                foreach (var flowItem in MyFlow.Item.Where(s => !String.IsNullOrEmpty(s.title)))
                 {
                     AddTaskButton(new ButtonInfo() { Title = flowItem.title, Task = flowItem.id });
                 }

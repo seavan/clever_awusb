@@ -32,7 +32,6 @@ namespace cvawusb_batch
 
         public bool Call(string name)
         {
-            Console.WriteLine("Calling {0}");
             var item = Find(name);
             if (stack.Contains(item))
             {
@@ -45,7 +44,9 @@ namespace cvawusb_batch
                 return false;
             }
 
-            return Execute(item.id);
+            var result = Execute(item.id);
+            stack.Pop();
+            return result;
         }
 
         CallStack stack = new CallStack();

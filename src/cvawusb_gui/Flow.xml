@@ -7,4 +7,16 @@
       <SetPort ip="192.168.11.122" port="5" value="5"></SetPort>
     </Sequence>
   </Item>
+  <Item id="disconnect_all">
+    <Sequence>
+      <SetPort ip="192.168.11.122" port="5" value="0"></SetPort>
+    </Sequence>
+  </Item>
+  <Item title="test" id="test">
+    <Sequence>
+      <Call id="disconnect_all"></Call>
+      <SetPort ip="192.168.11.122" port="5" value="0"></SetPort>
+    </Sequence>
+  </Item>
+
 </Flow>
