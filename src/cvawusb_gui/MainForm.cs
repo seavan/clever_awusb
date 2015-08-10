@@ -61,6 +61,11 @@ namespace cvawusb_gui
                 {
                     AddTaskButton(new ButtonInfo() { Title = flowItem.title, Task = flowItem.id });
                 }
+
+                ExpandedLogHeight = textBox1.Height;
+                ContractedLogHeight = logToggle.Height;
+                logToggle_Click(null, null);
+                SetStatusText("Выберите ключ для подключения:");
             };
 
         }
@@ -75,11 +80,11 @@ namespace cvawusb_gui
         {
             if (MyFlow.Execute(name))
             {
-                MessageBoxEx.Show(this, "Операция успешно выполнена", name);    
+                SetStatusText(String.Format("Ключ успешно подключен: {0}", name));
             }
             else
             {
-                MessageBoxEx.Show(this, "Ошибка выполнения операции", name);    
+                SetStatusText(String.Format("Ошибка подключения ключа: {0}", name, false));
             }
             
         }
@@ -105,5 +110,43 @@ namespace cvawusb_gui
             public string Title { get; set; }
             public string Task { get; set; }
         }
+
+        private void logToggle_Click(object sender, EventArgs e)
+        {
+            var bottom = textBox1.Bottom;
+            if (textBox1.Height < ExpandedLogHeight)
+            {
+                textBox1.Height = ExpandedLogHeight;
+                textBox1.Width += logToggle.Width;
+                textBox1.Left -= logToggle.Width;
+                //textBox1.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            }
+            else
+            {
+                textBox1.Height = ContractedLogHeight;
+                textBox1.Width -= logToggle.Width;
+                textBox1.Left += logToggle.Width;
+                //textBox1.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
+            }
+            textBox1.Top = bottom - textBox1.Height;
+            logToggle.Top = textBox1.Top;
+        }
+
+        public void SetStatusText(string text, bool alert = false)
+        {
+            hintLabel.Text = text;
+            if (alert)
+            {
+                hintLabel.ForeColor = Color.Red;
+            }
+            else
+            {
+                hintLabel.ForeColor = Color.Green;
+            }
+        }
+
+        private int ExpandedLogHeight = 0;
+        private int ContractedLogHeight = 0;
+
     }
 }
