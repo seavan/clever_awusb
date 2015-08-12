@@ -80,11 +80,11 @@ namespace cvawusb_gui
         {
             if (MyFlow.Execute(name))
             {
-                SetStatusText(String.Format("Ключ успешно подключен: {0}", name));
+                SetStatusText(String.Format("Ключ \"{0}\" успешно подключен: ", MyFlow.Find(name).title));
             }
             else
             {
-                SetStatusText(String.Format("Ошибка подключения ключа: {0}", name, false));
+                SetStatusText(String.Format("Ошибка подключения ключа \"{0}\"", MyFlow.Find(name).title, false));
             }
             
         }
