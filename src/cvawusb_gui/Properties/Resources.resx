@@ -114,4 +114,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="MainForm_ALreadyLaunched" xml:space="preserve">
+    <value>Приложение уже запущено. Откройте, пожалуйста, запущенный экземпляр</value>
+  </data>
+  <data name="MainForm_AppTitle" xml:space="preserve">
+    <value>Clever AnywhereUSB tools</value>
+  </data>
 </root>

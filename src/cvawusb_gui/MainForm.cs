@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using cvawusb_batch;
+using cvawusb_gui.Properties;
 
 namespace cvawusb_gui
 {
@@ -47,8 +50,48 @@ namespace cvawusb_gui
                 get { return Encoding.Default; }
             }
         }
+
+
+        [DllImport("user32.dll")]
+        public static extern bool ShowWindowAsync(HandleRef hWnd, int nCmdShow);
+        public const int SW_RESTORE = 9;
+
+        public bool SwitchToCurrent()
+        {
+            IntPtr hWnd = IntPtr.Zero;
+            Process process = Process.GetCurrentProcess();
+            Process[] processes = Process.GetProcessesByName(process.ProcessName);
+            foreach (Process _process in processes)
+            {
+                // Get the first instance that is not this instance, has the
+                // same process name and was started from the same file name
+                // and location. Also check that the process has a valid
+                // window handle in this session to filter out other user's
+                // processes.
+
+                if (_process.Id != process.Id &&
+                  _process.MainModule.FileName == process.MainModule.FileName &&
+                  _process.MainWindowHandle != IntPtr.Zero)
+                {
+                    hWnd = _process.MainWindowHandle;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public MainForm()
         {
+            if (SwitchToCurrent())
+            {
+                MessageBox.Show(Resources.MainForm_ALreadyLaunched,
+                    Resources.MainForm_AppTitle);
+                Application.Exit();
+                Close();
+                return;
+            }
+
             InitializeComponent();
             Load += (sender, args) =>
             {
