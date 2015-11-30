@@ -16,7 +16,7 @@ namespace cvawusb_batch
         private const string PROTO_FORMAT = "http://{0}";
         private const string REALPORT_CONFIG_URL = "/config/applications/realport_usb_config.htm";
         private const string REALPORT_POST_CONFIG_URL = "/Forms/realport_usb_config_1";
-        private const string PORT_GROUP_REGEX = @"<select.*?(RpUsbGroupList\?\d+).*?>.*?</select>";
+        private const string PORT_GROUP_REGEX = @"<select name=""(RpUsbGroupList\?\d+)"".*?>.*?</select>";
         private const string PORT_GROUP_SELECTED_REGEX = @"option value=(.*?) selected";
         private const string PORT_FORMAT = "RpUsbGroupList?{0}";
         private const string GROUP_FORMAT = "{0:X2}000000";
