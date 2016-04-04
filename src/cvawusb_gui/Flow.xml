@@ -1,22 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Flow>
-  <Item title="Fiddling with port 5/group 5" id="group5">
+  <Item id="disconnect_all" title="Fiddling with disconnect all">
     <Sequence>
-      <SetPort ip="192.168.11.122" port="5" value="0"></SetPort>
-      <Disconnect device="VID_2022&amp;PID_0139&amp;MI_00"></Disconnect>
-      <SetPort ip="192.168.11.122" port="5" value="5"></SetPort>
+      <SetPort ip="172.16.0.11" port="1" value="0"></SetPort>
+      <SetPort ip="172.16.0.11" port="8" value="0"></SetPort>
     </Sequence>
   </Item>
-  <Item id="disconnect_all">
-    <Sequence>
-      <SetPort ip="192.168.11.122" port="5" value="0"></SetPort>
-    </Sequence>
-  </Item>
-  <Item title="test" id="test">
-    <Sequence>
-      <Call id="disconnect_all"></Call>
-      <SetPort ip="192.168.11.122" port="5" value="0"></SetPort>
-    </Sequence>
-  </Item>
-
 </Flow>

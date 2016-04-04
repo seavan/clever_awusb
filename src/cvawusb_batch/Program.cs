@@ -55,12 +55,12 @@ namespace cvawusb_batch
                 Console.WriteLine("{0} - {1}", item.title, item.id);
             }
 
-            var testGroup = "group3";
+            var testGroup = "disconnect_all";
 
-            if (args.Length > 0)
+            /* if (args.Length > 0)
             {
                 testGroup = args[0];
-            }
+            } */
 
             if (!flow.Exists(testGroup))
             {
@@ -70,9 +70,9 @@ namespace cvawusb_batch
 
             var selectedItem = flow.Find(testGroup);
 
-            Console.WriteLine("Executing {0}", selectedItem.title);
+            Console.WriteLine("Executing {0}", selectedItem.id);
 
-            flow.Execute(selectedItem.title);
+            flow.Execute(selectedItem.id);
         }
     }
 }
