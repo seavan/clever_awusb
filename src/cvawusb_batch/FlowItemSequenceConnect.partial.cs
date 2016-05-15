@@ -15,6 +15,7 @@ namespace cvawusb_batch
             usbDeviceLookup.Test();
             if (!usbDeviceLookup.WaitForConnection(device))
             {
+                Console.WriteLine("Error connecting to device {0}", device);
                 return false;
             }
 

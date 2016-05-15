@@ -42,9 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlertMailer.cs" />
     <Compile Include="AnywhereUsbInvoke.cs" />
     <Compile Include="AnywhereUsbReconfig.cs" />
     <Compile Include="CallStack.cs" />
+    <Compile Include="DuplicateWriter.cs" />
     <Compile Include="Flow.cs" />
     <Compile Include="Flow.partial.cs" />
     <Compile Include="FlowConfigReader.cs" />

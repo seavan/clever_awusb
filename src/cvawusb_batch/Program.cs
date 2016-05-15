@@ -45,6 +45,10 @@ namespace cvawusb_batch
         }
         static void Main(string[] args)
         {
+            var writer = new DuplicateWriter();
+            Console.SetOut(writer);
+            Console.WriteLine("Clever AnywhereUSB-14 multi-host remote control tool");
+            Console.WriteLine("Usage: cvawusb_batch [group name] [--list] [--alert]");
             Console.WriteLine("Loading flow");
 
             var flow = FlowConfigReader.Read("Flow.xml");
@@ -55,24 +59,46 @@ namespace cvawusb_batch
                 Console.WriteLine("{0} - {1}", item.title, item.id);
             }
 
-            var testGroup = "disconnect_all";
+            string testGroup = null;
 
-            /* if (args.Length > 0)
+            if (args.Length > 0)
             {
-                testGroup = args[0];
-            } */
-
-            if (!flow.Exists(testGroup))
-            {
-                Console.WriteLine("Flow item id not found in config file");
-                return;
+                testGroup = args.FirstOrDefault(s => !s.StartsWith("--"));
             }
 
-            var selectedItem = flow.Find(testGroup);
+            bool listDevices = args.Any(s => s == "--list");
 
-            Console.WriteLine("Executing {0}", selectedItem.id);
+            if (listDevices)
+            {
+                var lookup = new UsbDeviceLookup();
+                var devices = lookup.GetUSBDevices();
+                foreach (var d in devices)
+                {
+                    Console.WriteLine(d.DeviceID);
+                }    
+            }
 
-            flow.Execute(selectedItem.id);
+            bool result = false;
+
+            if (testGroup != null)
+            {
+                if (!flow.Exists(testGroup))
+                {
+                    Console.WriteLine("Flow item id not found in config file");
+                    return;
+                }
+                var selectedItem = flow.Find(testGroup);
+                Console.WriteLine("Executing {0}", selectedItem.id);
+                result = flow.Execute(selectedItem.id);
+            }
+
+            bool alert = args.Any(s => s == "--alert");
+
+            if (alert && !result)
+            {
+                Console.WriteLine("Could not complete the sequence. Sending alert.");
+                AlertMailer.Send(writer.GetAll());
+            }
         }
     }
 }

@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Flow>
-    <Item id="disconnect_all" title="Fiddling with disconnect all">
+    <Item id="check_devices" title="Check devices">
       <Sequence>
-        <SetPort ip="172.16.0.11" port="1" value="0"></SetPort>
-        <SetPort ip="172.16.0.11" port="8" value="0"></SetPort>
+        <Connect device="6&amp;201153C1&amp;0&amp;8"></Connect>
       </Sequence>
     </Item>
 </Flow>
