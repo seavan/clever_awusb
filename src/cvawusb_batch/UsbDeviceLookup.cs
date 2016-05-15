@@ -76,8 +76,11 @@ namespace cvawusb_batch
 
             foreach (var device in collection)
             {
+                var deviceId = (string) device.GetPropertyValue("DeviceID");
+                if(!deviceId.ToLower().Contains("usb")) continue;
+                
                 devices.Add(new USBDeviceInfo(
-                (string)device.GetPropertyValue("DeviceID"),
+                deviceId,
                 (string)device.GetPropertyValue("PNPDeviceID"),
                 (string)device.GetPropertyValue("Description")
                 ));
