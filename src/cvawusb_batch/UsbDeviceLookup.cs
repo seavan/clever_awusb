@@ -71,7 +71,7 @@ namespace cvawusb_batch
             var devices = new List<USBDeviceInfo>();
 
             ManagementObjectCollection collection;
-            using (var searcher = new ManagementObjectSearcher(@"Select * From Win32_USBHub"))
+            using (var searcher = new ManagementObjectSearcher(@"Select * From Win32_PnPEntity"))
                 collection = searcher.Get();
 
             foreach (var device in collection)
