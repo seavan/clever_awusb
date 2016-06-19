@@ -95,6 +95,7 @@ namespace cvawusb_batch
         [System.Xml.Serialization.XmlElementAttribute("Connect", typeof(FlowItemSequenceConnect))]
         [System.Xml.Serialization.XmlElementAttribute("Disconnect", typeof(FlowItemSequenceDisconnect))]
         [System.Xml.Serialization.XmlElementAttribute("SetPort", typeof(FlowItemSequenceSetPort))]
+        [System.Xml.Serialization.XmlElementAttribute("SetProxy", typeof(FlowItemSequenceSetProxy))]
         public object[] Items
         {
             get
@@ -228,6 +229,41 @@ namespace cvawusb_batch
         }
     }
 
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    public partial class FlowItemSequenceSetProxy
+    {
 
-    
+        private string proxyField;
+
+        private bool enabledField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string proxy
+        {
+            get
+            {
+                return this.proxyField;
+            }
+            set
+            {
+                this.proxyField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool enabled
+        {
+            get
+            {
+                return this.enabledField;
+            }
+            set
+            {
+                this.enabledField = value;
+            }
+        }
+    }    
 }

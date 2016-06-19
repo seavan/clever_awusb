@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Flow>
-    <Item id="check_devices" title="Check devices">
+    <Item id="set_proxy" title="Set proxy">
       <Sequence>
-        <Connect device="6&amp;201153C1&amp;0&amp;8"></Connect>
+        <SetProxy proxy="127.0.0.1:8000" enabled="false"/>
       </Sequence>
     </Item>
 </Flow>

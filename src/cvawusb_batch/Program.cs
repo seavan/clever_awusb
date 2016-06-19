@@ -98,7 +98,7 @@ namespace cvawusb_batch
             {
                 Console.WriteLine("Could not complete the sequence. Sending alert.");
                 AlertMailer.Send(writer.GetAll());
-            }
+            } 
         }
     }
 }
